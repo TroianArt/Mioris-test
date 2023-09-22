@@ -8,8 +8,8 @@ using UnityEditor;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-[CreateAssetMenu(fileName = "QuestionsLib", menuName = "ScriptableObjects/QuestionsLib")]
-public class QuestionsLib : ScriptableObject
+[CreateAssetMenu(fileName = "QuestionsLibrary", menuName = "ScriptableObjects/QuestionsLibrary")]
+public class QuestionsLibrary : ScriptableObject
 {
     public TextAsset[] jsons;
     public List<QuestionData> questionDatas;
@@ -21,8 +21,15 @@ public class QuestionsLib : ScriptableObject
 
         foreach (TextAsset json in jsons)
         {
-            JsonQuestionModel jsonQuestionModel = JsonConvert.DeserializeObject<JsonQuestionModel>(json.text);
-            questionDatas.Add(new QuestionData(jsonQuestionModel));
+            try
+            {
+                JsonQuestionModel jsonQuestionModel = JsonConvert.DeserializeObject<JsonQuestionModel>(json.text);
+                questionDatas.Add(new QuestionData(jsonQuestionModel));
+            }
+            catch(Exception e)
+            {
+                Debug.LogError(e.Message);
+            }
         }
     }
 

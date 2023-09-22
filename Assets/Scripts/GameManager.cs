@@ -1,15 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private QuestionsLib questionsLib;
+    public static GameManager Instance;
 
-    public QuestionsLib QuestionsLib => questionsLib;
+    public static Action OnAnswered;
 
-    void Awake()
+    [SerializeField] private QuestionsLibrary questionsLibrary;
+
+    public QuestionsLibrary QuestionsLibrary => questionsLibrary;
+
+    private void Awake()
     {
-        questionsLib.Init();
+        Instance = this;
+        questionsLibrary.Init();
     }
 }

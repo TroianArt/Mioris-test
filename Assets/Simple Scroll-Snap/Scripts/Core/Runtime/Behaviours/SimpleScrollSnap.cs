@@ -2,6 +2,8 @@
 // Copyright (c) Daniel Lochner
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -18,7 +20,7 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         [SerializeField] private MovementType movementType = MovementType.Fixed;
         [SerializeField] private MovementAxis movementAxis = MovementAxis.Horizontal;
         [SerializeField] private bool useAutomaticLayout = true;
-        [SerializeField][Range(-10, 10)] private float automaticLayoutSpacing = -0.25f;
+        [SerializeField] private float automaticLayoutSpacing = -0.25f;
         [SerializeField] private SizeControl sizeControl = SizeControl.Fit;
         [SerializeField] private Vector2 size = new Vector2(400, 250);
         [SerializeField] private Margins automaticLayoutMargins = new Margins(0);
@@ -296,6 +298,22 @@ namespace DanielLochner.Assets.SimpleScrollSnap
             GetVelocity();
         }
         
+        public void ShuffleItems()
+        {
+            List<int> indexes = new List<int>();
+            List<Transform> items = new List<Transform>();
+            for (int i = 0; i < Content.transform.childCount; ++i)
+            {
+                indexes.Add(i);
+                items.Add(Content.transform.GetChild(i));
+            }
+
+            foreach (var item in items)
+            {
+                item.SetSiblingIndex(indexes[UnityEngine.Random.Range(0, indexes.Count)]);
+            }
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             isPressing = true;
@@ -664,11 +682,11 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         {
             Add(panel, 0);
         }
-        public void AddToBack(GameObject panel)
+        public void AddToBack(GameObject panel, bool instantiate = true)
         {
-            Add(panel, NumberOfPanels);
+            Add(panel, NumberOfPanels, instantiate);
         }
-        public void Add(GameObject panel, int index)
+        public void Add(GameObject panel, int index, bool instantiate = true)
         {
             if (NumberOfPanels != 0 && (index < 0 || index > NumberOfPanels))
             {
@@ -681,7 +699,8 @@ namespace DanielLochner.Assets.SimpleScrollSnap
                 return;
             }
 
-            panel = Instantiate(panel, Content, false);
+            if(instantiate) panel = Instantiate(panel, Content, false);
+            panel.transform.SetParent(Content);
             panel.transform.SetSiblingIndex(index);
 
             if (ValidConfig)
