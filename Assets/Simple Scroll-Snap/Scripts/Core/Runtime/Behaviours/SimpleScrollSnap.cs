@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace DanielLochner.Assets.SimpleScrollSnap
 {
@@ -310,7 +311,7 @@ namespace DanielLochner.Assets.SimpleScrollSnap
 
             foreach (var item in items)
             {
-                item.SetSiblingIndex(indexes[UnityEngine.Random.Range(0, indexes.Count)]);
+                item.SetSiblingIndex(indexes[Random.Range(0, indexes.Count)]);
             }
         }
 
