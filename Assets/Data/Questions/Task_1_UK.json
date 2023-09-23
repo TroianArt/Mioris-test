@@ -1,0 +1,50 @@
+{
+  "question": "Співставте \n марку машини - країну -  дату заснування",
+  "questionItemArray": [
+    {
+      "answer_1": "BWM",
+      "answer_2": "Німетчина",
+      "answer_3": "1916"
+    },
+    {
+      "answer_1": "AUDI",
+      "answer_2": "Німетчина",
+      "answer_3": "1909"
+    },
+    {
+      "answer_1": "Citroen",
+      "answer_2": "Франція",
+      "answer_3": "1919"
+    },
+    {
+      "answer_1": "Fiat",
+      "answer_2": "Італія",
+      "answer_3": "1899"
+    },
+    {
+      "answer_1": "Jeep",
+      "answer_2": "США",
+      "answer_3": "1941"
+    },
+    {
+      "answer_1": "Ford",
+      "answer_2": "США",
+      "answer_3": "1903"
+    },
+    {
+      "answer_1": "Nissan",
+      "answer_2": "Індонезія",
+      "answer_3": "1986"
+    },
+    {
+      "answer_1": "Honda",
+      "answer_2": "Японія",
+      "answer_3": "1948"
+    },
+    {
+      "answer_1": "Toyota",
+      "answer_2": "Індонезія",
+      "answer_3": "1971"
+    }
+  ]
+}
